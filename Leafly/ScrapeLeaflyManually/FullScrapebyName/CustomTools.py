@@ -82,7 +82,14 @@ def get_strain_data(strain_links):
             potency = 'Unavailable'
             print('POTENCY_NOT_FOUND')
 
-        type = soup.find('span', {'class':'text-xs bg-leafly-white py-sm px-sm rounded'}).text
+        try:
+            type = soup.find('span', {'class':'text-xs bg-leafly-white py-sm px-sm rounded'}).text
+        except Exception as e:
+            '''
+            *some strains dont list type
+            '''
+            type = 'Unavailable'
+            print('TYPE_NOT_FOUND')
 
         try:
             rating = soup.find('span', {'class':'pr-xs'}).text
